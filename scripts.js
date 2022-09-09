@@ -1,6 +1,8 @@
 
-const meals = document.getElementById("meal");
+const mealEL = document.getElementById("meal");
 const favoriteContainer = document.getElementById("fav-meals");
+const searchTerm = document.getElementById("search-term");
+const searchBtn = document.getElementById("search");
 
 getRandomMeal();
 fetchFavMeals();
@@ -10,8 +12,6 @@ async function getRandomMeal(){
 
     const respData = await resp.json();
     const randomMeal = respData.meals[0];
-
-    console.log(randomMeal);
 
     addMeal(randomMeal, true)
 }
@@ -27,15 +27,21 @@ async function getMealById(id){
 }
 
 async function getMealBySearch(tem){
-    const meals = fetch("www.themealdb.com/api/json/v1/1/search.php?s=" + tem)
+    const resp = await fetch("https://www.themealdb.com/api/json/v1/1/search.php?s=" + tem);
+    console.log(resp);
+    const respData = await resp.json();
+    const meals = respData.meals;
+
+    return meals;
 }
 
 function addMeal(mealData, random = false){
+
     const meal = document.createElement('div');
     meal.classList.add('meal');
 
     meal.innerHTML = `<div class="meal-header">
-                        ${random ? `<span class="random">Random Recipe</span>` : ``}
+                        ${random ? `<span class="random">Random Recipe</span>` : ""}
                         <img src="${mealData.strMealThumb}" alt="${mealData.strMeal}">
                     </div>
                     <div class="meal-body">
@@ -48,16 +54,14 @@ function addMeal(mealData, random = false){
                 if(btn.classList.contains("active")){
                     removeMealLS(mealData.idMeal);
                     btn.classList.remove("active");
-                    
                 }else{
                     addMealLS(mealData.idMeal);
                     btn.classList.add("active");   
                 }
-                
                 fetchFavMeals();
-            })
+            });
                 
-        meals.appendChild(meal);
+            mealEL.appendChild(meal);
 }
 
 function addMealLS(mealId){
@@ -109,3 +113,16 @@ function addMealFav(mealData){
 
         favoriteContainer.appendChild(favMeal);
 }
+
+searchBtn.addEventListener("click", async () => {
+
+    mealEL.innerHTML = "";
+
+    const search = searchTerm.value;
+    const meals = await getMealBySearch(search);
+    if(meals){
+        meals.forEach(meal => {
+            addMeal(meal);
+        });
+    }
+})
