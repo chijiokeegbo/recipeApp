@@ -10,20 +10,40 @@
     <title>Recipe Apps</title>
 </head>
 <body>
-    <div class="mobile-container">
-        <header>
-            <input type="text" name="" id="search-term">
-            <button id="search"><i class="fas fa-search"></i></button>
-        </header>
-        <div class="fav-container">
-            <h3>Favorite meals</h3>
-            <ul class="fav-meals" id="fav-meals">
-            </ul>
+        <div class="mobile-container">
+            <header>
+                <input type="text" name="" id="search-term">
+                <button id="search"><i class="fas fa-search"></i></button>
+            </header>
+            <div class="fav-container">
+                <h3>Favorite meals</h3>
+                <ul class="fav-meals" id="fav-meals">
+                </ul>
+            </div>
+            <div class="meal" id="meal"></div>
         </div>
-        <div class="meal" id="meal">
-            
+        
+        <div class="meal-info-container">
+            <div class="meal-info" id="meal-info">
+                <button id="close-popup" class="close-popup"><i class="fas fa-close"></i></button>
+                <div>
+                    <h1>Image title</h1>
+                    <img src="https://www.themealdb.com/images/media/meals/qptpvt1487339892.jpg" alt="Tandoori chicken">
+                </div>
+                <div>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                        Repellat exercitationem eveniet distinctio.
+                    </p>
+                    <ul>
+                        <li>Ingr 1/ Measure</li>
+                        <li>Ingr 2/ Measure</li>
+                        <li>Ingr 3/ Measure</li>
+                    </ul>
+                </div>
+            </div>
         </div>
-    </div>
+
+    
     <script src="scripts.js"></script>
 </body>
 </html>
