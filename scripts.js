@@ -126,24 +126,25 @@ function addMealFav(mealData){
 }
 
 function showMealInfo(mealData){
+
     mealInfoEL.innerHTML = "";
+
     const mealEl = document.createElement('div');
     
     const ingredients = [];
-    for(let i = 0; i <= 20; i++){
-        if(mealData['strIngredient'+i]){
-            ingredients.push(`${mealData['strIngredient'+i]} - ${mealData['strMeasure'+i]}`);
-            console.log(ingredients)
-        }else{
-            break;
-        }
-        
-    }
 
+    for(let i=1; i<=20; i++){
+            if(mealData["strIngredient" + i]){
+                ingredients.push(`${mealData["strIngredient" + i]} - ${mealData["strMeasure" + i]}`);
+            }else{
+                break;
+            }
+        }
+    
     mealEl.innerHTML =  `<h1>${mealData.strMeal}</h1>
                         <img src="${mealData.strMealThumb}" alt="${meal.strMeal}">
                         <p>
-                        ${mealData.strInstructions}
+                            ${mealData.strInstructions}
                         </p>
                         <h3>Ingredient:</h3>
                         <ul>
